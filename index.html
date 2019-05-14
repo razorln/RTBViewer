@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>RealtimeBoard Viewer</title>
+	<link rel="stylesheet" href="RTBViewer.css" type="text/css" />
+	<script src="Resources.js"></script>
+	<script src="Widgets.js"></script>
+	<script src="Renderer.js"></script>
+	<script src="RTBViewer.js"></script>
+</head>
+<body>
+	<div>
+		<input type="radio" name="RendererType" id="HTMLRenderer" checked="checked" value="html" />
+		<label for="HTMLRenderer">html</label>
+		<input type="radio" name="RendererType" id="CANVASRenderer" value="canvas" />
+		<label for="CANVASRenderer">canvas</label>
+	</div>
+	<div id="content"></div>
+	<script>
+		var rad = document.getElementsByName("RendererType");
+		var viewer = new RTBViewer({
+			source: "http://api.realtimeboard.com/objects/74254402",
+			container: document.getElementById("content"),
+			width: 1200,
+			height: 850,
+			maxScale: 400,
+			minScale: 5,
+			typeRender: RendererType.html
+		});
+
+		for (var i = 0; i < rad.length; i++)
+		{
+			rad[i].onclick = function ()
+			{
+				viewer.changeTypeRenderer(RendererType[this.value]);
+			};
+		}
+	</script>
+</body>
+</html>
